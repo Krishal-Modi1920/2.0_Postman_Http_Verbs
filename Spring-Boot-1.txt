@@ -72,3 +72,116 @@ Jar can be given to anyone for running the code
 HTTP Verb = GET, POST, PUT, DELETE
 
 REST API call meaning we are calling HTTP verb + url
+
+
+**) JournalEntryController.java
+
+package net.engineeringdigest.journalApp.controller;
+
+import net.engineeringdigest.journalApp.entity.JournalEntry;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/journal")
+public class JournalEntryController {
+
+    private Map<Long, JournalEntry> journalEntries = new HashMap<>();
+
+    // Getting
+    @GetMapping
+    public List<JournalEntry> getAll(){ //localhost:8090/journal GET
+        return new ArrayList<>(journalEntries.values());
+    }
+
+    // Submitting
+    @PostMapping
+    public boolean createEntry(@RequestBody JournalEntry myEntry){ //localhost:8090/journal POST
+        journalEntries.put(myEntry.getId(), myEntry);
+        return true;
+    }
+
+    // Getting some number
+    @GetMapping("id/{myId}")
+    public JournalEntry getJournalEntryById(@PathVariable Long myId){
+        return journalEntries.get(myId);
+    }
+
+    // Deleting record
+    @DeleteMapping("id/{myId}")
+    public JournalEntry deleteJournalEntryById(@PathVariable Long myId)
+    {
+        return journalEntries.remove(myId);
+    }
+
+    // Update record
+    @PutMapping("/id/{id}")
+    public JournalEntry updateJournalById(@PathVariable Long id, @RequestBody JournalEntry myEntry){
+        return journalEntries.put(id, myEntry);
+    }
+}
+
+
+**) JournalApplication
+
+package net.engineeringdigest.journalApp;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class JournalApplication {
+
+	public static void main(String[] args) {
+
+		SpringApplication.run(JournalApplication.class, args);
+	}
+
+}
+
+
+**) JournalEntry
+
+package net.engineeringdigest.journalApp.entity;
+
+public class JournalEntry {
+    private long id;
+    private String title;
+    private String content;
+
+    public long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public JournalEntry(long id, String title, String content) { // Constructor for initialization
+        this.id = id;
+        this.title = title;
+        this.content = content;
+    }
+
+}
+
