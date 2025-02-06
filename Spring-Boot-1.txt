@@ -1,0 +1,74 @@
+********************************************************************************************************************************************************************
+**) Spring-Boot
+- Spring Boot is a framework for building applications in the java programming language.
+- However, spring Boot takes this convenience to the next level by focusing specifically on reducing the eeffort required to setup and configure a spring application.
+
+Advantages
+- Auto Configuration
+- Standalone Application
+
+*) The @SpringBootApplication annotation is use instead of ApplicationContext context = new ClassPathXmlApplicationContext
+	The @SpringBootApplication annotation alone brings in a lot of preconfigured features, including atuomatic component scanning and embedded server configuration, server configuration, which would have required more steps in a traditional spring setup.
+
+*) Packaging
+
+- Jar = Java Archieve
+- War = Web Application Archieve
+The major difference is Jar can be run on command instruction whereas war is to be deployed for running.
+
+**) Starting a project 
+Open Spring Initializer website and create a Maven Project 
+Then drag it into the Intellij
+ 
+********************************************************************************************************************************************************************
+**) Maven 
+
+Maven is a build automation and dependency management tool for Java projects. It helps by:
+
+Managing Dependencies – Automatically downloads and manages external libraries.
+Building the Project – Compiles, tests, and packages code into JAR/WAR files.
+Standardizing Project Structure – Follows a consistent directory layout.
+Handling Plugins – Supports additional tools for testing, deployment, and documentation.
+
+*) Target Folder is used to store Jar
+Jar can be given to anyone for running the code 
+
+********************************************************************************************************************************************************************
+**) Structure of Spring Boot Folders
+- .idea = intellij related files all the things related to Intellij (tools, etc)
+- mvn = maven wrapper for acccessing maven things inside the project 
+- gitignore = here we can write which files we want ignore in the entire project folder
+- src -> main 
+  application.properties = configurations like with mongoDb and soon
+  templates = used to create html template in spring boot
+
+- src -> test
+
+
+- pom.xml
+  All the information and dependencies
+  - plugins = helps in packaging our code and all folders
+  - parents = means it will inherit few dependencies and others 
+  - properties = has compiler plugin with version 
+
+- target -> jar consist of everything like tomcat server
+	mvn clean - to clean
+	mvn package - to make them again
+********************************************************************************************************************************************************************
+- Now we will get the objects from the IOC container instead of making them by ourselves.
+- IOC will scan the @Component for keeping it inside the container means all to take to object 
+- object = bean, now after Writing @Component on class the class can remain inside IOC container
+
+*) @SpringBootApplication
+   consist of @Configuration, @EnableAutoConfiguration, @ComponentScan
+	- @Configuration – This tells Spring that the class contains bean definitions (i.e., methods that create objects managed by Spring).
+	- @EnableAutoConfiguration – This allows Spring Boot to automatically configure beans based on the dependencies you have in your project.
+	- @ComponentScan – This tells Spring to look for components (like @Component, @Service, @Repository, etc.) in the specified package and register them in the 		  Spring container (IoC container).
+
+********************************************************************************************************************************************************************
+
+**) RestAPI = Representational State Transfer Application Programming Interface
+
+HTTP Verb = GET, POST, PUT, DELETE
+
+REST API call meaning we are calling HTTP verb + url
